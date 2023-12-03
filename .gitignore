@@ -84,3 +84,8 @@ fabric.properties
 
 # VS code
 /.vscode/f
+
+
+2023/cmake-build-debug/
+2023/in
+
