@@ -49,58 +49,49 @@ int power(string str) {
     return 0;
 }
 
-bool lexComp(string s1, string s2) {
+string lexStr(string s) {
     map<char, char> m;
-    m['A'] = 'a';
-    m['K'] = 'b';
-    m['Q'] = 'c';
-    m['J'] = 'p';
-    m['T'] = 'e';
-    m['0'] = 'f';
-    m['9'] = 'g';
-    m['8'] = 'h';
-    m['7'] = 'i';
-    m['6'] = 'j';
-    m['5'] = 'k';
-    m['4'] = 'l';
-    m['4'] = 'm';
-    m['3'] = 'n';
-    m['2'] = 'o';
+    m['A'] = 'o';
+    m['K'] = 'n';
+    m['Q'] = 'm';
+    m['T'] = 'l';
+    m['0'] = 'k';
+    m['9'] = 'j';
+    m['8'] = 'i';
+    m['7'] = 'h';
+    m['6'] = 'g';
+    m['5'] = 'f';
+    m['4'] = 'e';
+    m['4'] = 'd';
+    m['3'] = 'c';
+    m['2'] = 'b';
+    m['J'] = 'a';
 
-    string s3, s4;
-    for (char c: s1) s3.push_back(m[c]);
-    for (char c: s2) s4.push_back(m[c]);
+    string s2;
+    for (char c: s) s2.push_back(m[c]);
 
-    cerr << s3 << "   " << s4<<endl;
-
-    return s3.compare(s4) == 1;
+    return s2;
 }
 
 
 int32_t main() {
     string s;
     int i;
-    vector<pair<string, int>> people;
+    vector<pair<pair<int,string>, int>> people;
     while (getline(cin, s)) {
         stringstream stream(s);
         stream >> s >> i;
-        people.emplace_back(s, i);
-        cerr << s << "  " << power(s) << endl;
+        people.emplace_back(pair<int,string>{power(s), lexStr(s)}, i);
+        cerr << s << "  " << power(s) << " "  << lexStr(s) << endl;
     }
 
 
 
-    std::sort(people.begin(), people.end(), [&](const pair<string, int> &first, const pair<string, int> &second) {
-        if (power(first.first) != power(second.first))
-            return power(first.first) < power(second.first);
-
-
-        return lexComp(first.first,second.first);
-    });
+    std::sort(people.begin(), people.end());
     int count = 0;
     int ans = 0;
     for(auto[_,j] : people) {
-        cerr << j <<endl;
+        cerr << _.first<<"  " << _.second <<"\t\t" << j<<endl;
         ans += (++count) * j;
     }
     cout << ans<<endl;
