@@ -1,3 +1,9 @@
+# ignore files without extension
+*
+!/**/
+!*.*
+
+
 /.vs/
 /test/out/
 /CMakeFiles/
@@ -88,4 +94,9 @@ fabric.properties
 
 2023/cmake-build-debug/
 2023/in
+*.in
+
+
+# haskell
+*.hi
 
